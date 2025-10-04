@@ -3,7 +3,7 @@
 import type { AsteroidData } from "@/lib/space-objects-data"
 import ObjectInfo from "./object-info"
 import { PropertyCard } from "./ui/info-card"
-import { Orbit, Atom, Milestone, Goal, Ruler, CircleDot, Info } from "lucide-react"
+import { Orbit, Atom, Milestone, Goal, Ruler, CircleDot } from "lucide-react"
 
 interface AsteroidInfoProps {
     asteroid: AsteroidData

@@ -8,12 +8,18 @@ import { AsteroidData } from '@/lib/space-objects-data';
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { Text } from '@react-three/drei';
 
+// Define a more specific type for the controls ref
+interface OrbitControlsRef {
+    target: THREE.Vector3;
+    update: () => void;
+}
+
 interface AsteroidProps {
   asteroid: AsteroidData;
   simulationSpeed: number;
   onClick: (asteroid: AsteroidData) => void;
   isFollowed: boolean;
-  controlsRef: any;
+  controlsRef: React.RefObject<OrbitControlsRef>;
 }
 
 const Asteroid = forwardRef<THREE.Group, AsteroidProps>(({ asteroid, simulationSpeed, onClick, isFollowed, controlsRef }, ref) => {
@@ -68,7 +74,7 @@ const Asteroid = forwardRef<THREE.Group, AsteroidProps>(({ asteroid, simulationS
 
   return (
     <group>
-        <primitive object={new THREE.Line(orbitGeometry, new THREE.LineBasicMaterial({ color: "#d6baff", transparent: true, opacity: 0.2, linewidth: 1}))} />
+        <primitive object={new THREE.Line(orbitGeometry, new THREE.LineBasicMaterial({ color: "#d6baff", transparent: true, opacity: 0.2, linewidth: 1 }))} />
         <group ref={ref}>
             <mesh 
                 ref={asteroidRef}

@@ -8,12 +8,18 @@ import * as THREE from "three"
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { useOptimizedTexture } from "@/lib/hooks/use-optimized-texture"
 
+// Define a more specific type for the controls ref
+interface OrbitControlsRef {
+    target: THREE.Vector3;
+    update: () => void;
+}
+
 interface PlanetProps {
     planet: PlanetData
     simulationSpeed: number;
     onClick: () => void;
     isFollowed: boolean;
-    controlsRef: any;
+    controlsRef: React.RefObject<OrbitControlsRef>;
 }
 
 const Planet = forwardRef<THREE.Group, PlanetProps>(({ planet, simulationSpeed, onClick, isFollowed, controlsRef }, ref) => {

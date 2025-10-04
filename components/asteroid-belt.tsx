@@ -2,7 +2,7 @@
 
 import { useRef } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { TextureLoader } from 'three';
+import { TextureLoader, Group } from 'three';
 import { useLoader } from '@react-three/fiber';
 
 interface AsteroidBeltProps {
@@ -10,7 +10,7 @@ interface AsteroidBeltProps {
 }
 
 const AsteroidBelt = ({ simulationSpeed }: AsteroidBeltProps) => {
-  const asteroidRef = useRef<any>();
+  const asteroidRef = useRef<Group>(null);
 
   const [asteroidTexture] = useLoader(TextureLoader, ['/textures/planets/2k_mercury.jpg']);
 

@@ -1,7 +1,7 @@
 'use client'
 
 import type { CometData } from "@/lib/space-objects-data"
-import { Orbit, Atom, Ruler, CircleDot } from "lucide-react"
+import { Orbit, Ruler, CircleDot } from "lucide-react"
 import ObjectInfo from "./object-info"
 import { PropertyCard } from "./ui/info-card"
 

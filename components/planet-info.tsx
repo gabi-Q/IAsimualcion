@@ -1,7 +1,7 @@
 'use client'
 
 import type { PlanetData } from "@/lib/planet-data"
-import { Eye, Orbit, Atom, Milestone, Goal, Ruler, CircleDot } from "lucide-react"
+import { Orbit, Milestone, Ruler, CircleDot } from "lucide-react"
 import ObjectInfo from "./object-info"
 import { PropertyCard } from "./ui/info-card"
 

@@ -3,9 +3,12 @@
 import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { PlanetData, planets } from '@/lib/planet-data';
-import { AsteroidData, asteroids, CometData, comets } from '@/lib/space-objects-data';
+import { asteroids, comets } from '@/lib/space-objects-data';
 
-type SearchableObject = any;
+interface SearchableObject {
+  id: string;
+  name: string;
+}
 
 interface AiSearchProps {
   objects: SearchableObject[];

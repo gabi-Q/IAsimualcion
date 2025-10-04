@@ -8,12 +8,18 @@ import { CometData } from '@/lib/space-objects-data';
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { Text } from '@react-three/drei';
 
+// Define a more specific type for the controls ref
+interface OrbitControlsRef {
+    target: THREE.Vector3;
+    update: () => void;
+}
+
 interface CometProps {
   comet: CometData;
   simulationSpeed: number;
   onClick: (comet: CometData) => void;
   isFollowed: boolean;
-  controlsRef: any;
+  controlsRef: React.RefObject<OrbitControlsRef>;
 }
 
 const Comet = forwardRef<THREE.Group, CometProps>(({ comet, simulationSpeed, onClick, isFollowed, controlsRef }, ref) => {

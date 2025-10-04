@@ -1,6 +1,6 @@
-"use client"
+'use client'
 
-import React, { useRef, useMemo, forwardRef } from "react"
+import { useRef, useMemo, forwardRef } from "react"
 import { useFrame } from "@react-three/fiber"
 import * as THREE from "three"
 import { useMobile } from "@/lib/hooks/use-mobile"
