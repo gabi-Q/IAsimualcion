@@ -9,7 +9,11 @@ const celestialObjects = [
   ...comets,
 ];
 
-export default function CelestialSelector({ onObjectSelect }) {
+type CelestialSelectorProps = {
+  onObjectSelect: (id: string) => void;
+};
+
+export default function CelestialSelector({ onObjectSelect }: CelestialSelectorProps) {
   return (
     <div className="absolute top-4 left-4 z-10">
       <select
