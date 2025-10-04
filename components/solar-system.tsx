@@ -32,6 +32,12 @@ type SearchableObject = {
   ref: React.RefObject<THREE.Group>;
 };
 
+// Define a more specific type for the OrbitControls ref to avoid using 'any'
+interface OrbitControlsRef {
+    target: THREE.Vector3;
+    update: () => void;
+}
+
 export default function SolarSystem() {
     const [selectedPlanet, setSelectedPlanet] = useState<PlanetData | null>(null)
     const [selectedSun, setSelectedSun] = useState<SunData | null>(null)
@@ -41,10 +47,10 @@ export default function SolarSystem() {
     const [isLoading, setIsLoading] = useState(true)
     const [simulationSpeed, setSimulationSpeed] = useState(4);
     const [activeFilter, setActiveFilter] = useState<FilterType>('all');
-    const [followedObject, setFollowedObject] = useState<any>(null);
+    const [followedObject, setFollowedObject] = useState<SearchableObject | null>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [viewTarget, setViewTarget] = useState(new THREE.Vector3(0, 0, 0));
-    const controlsRef = useRef<any>(null)
+    const controlsRef = useRef<OrbitControlsRef>(null)
     const isMobile = useMobile()
 
     const objectRefs = useRef<{[key: string]: React.RefObject<THREE.Group>}>({});
@@ -105,11 +111,11 @@ export default function SolarSystem() {
         setIsInfoVisible(true)
     }
     
-    const handleFollowToggle = (object: any) => {
-        if (followedObject && followedObject.id === object.id) {
+    const handleFollowToggle = (object: SearchableObject | undefined) => {
+        if (followedObject && object && followedObject.id === object.id) {
             setFollowedObject(null);
             setIsResetting(true);
-        } else {
+        } else if (object) {
             setFollowedObject(object);
             setIsResetting(false);
         }
