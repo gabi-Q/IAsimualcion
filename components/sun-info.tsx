@@ -19,6 +19,7 @@ export default function SunInfo({ sun, onClose, isVisible }: SunInfoProps) {
             onClose={onClose}
             isVisible={isVisible}
             onFollow={() => {}}
+            isFollowed={false}
         >
             <div className="space-y-4">
                 <p className="text-sm text-muted-foreground">{sun.description}</p>

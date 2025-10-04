@@ -5,9 +5,11 @@ import { Canvas, useFrame } from "@react-three/fiber"
 import { OrbitControls } from "@react-three/drei"
 import { EffectComposer, Bloom } from "@react-three/postprocessing"
 import * as THREE from 'three';
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { type PlanetData, planets, sunData, SunData } from "@/lib/planet-data"
 import { type AsteroidData, type CometData, asteroids, comets } from "@/lib/space-objects-data"
+import { type SearchableObject } from "@/lib/types";
 import Planet from "@/components/planet"
 import PlanetInfo from "@/components/planet-info"
 import Sun from "@/components/sun"
@@ -25,19 +27,6 @@ import FilterControls, { FilterType } from "./filter-controls"
 import AiSearch from "./ai-search";
 import CelestialSelector from "./celestial-selector";
 
-type SearchableObject = {
-  id: string;
-  name: string;
-  type: 'planet' | 'asteroid' | 'comet' | 'sun';
-  ref: React.RefObject<THREE.Group>;
-};
-
-// Define a more specific type for the OrbitControls ref to avoid using 'any'
-interface OrbitControlsRef {
-    target: THREE.Vector3;
-    update: () => void;
-}
-
 export default function SolarSystem() {
     const [selectedPlanet, setSelectedPlanet] = useState<PlanetData | null>(null)
     const [selectedSun, setSelectedSun] = useState<SunData | null>(null)
@@ -50,15 +39,15 @@ export default function SolarSystem() {
     const [followedObject, setFollowedObject] = useState<SearchableObject | null>(null);
     const [isResetting, setIsResetting] = useState(false);
     const [viewTarget, setViewTarget] = useState(new THREE.Vector3(0, 0, 0));
-    const controlsRef = useRef<OrbitControlsRef>(null)
+    const controlsRef = useRef<OrbitControlsImpl>(null!)
     const isMobile = useMobile()
 
-    const objectRefs = useRef<{[key: string]: React.RefObject<THREE.Group>}>({});
+    const objectRefs = useRef<{[key: string]: React.RefObject<THREE.Group | null>}>({});
 
     const searchableObjects: SearchableObject[] = useMemo(() => {
         const getRef = (id: string) => {
             if (!objectRefs.current[id]) {
-                objectRefs.current[id] = React.createRef<THREE.Group>();
+                objectRefs.current[id] = React.createRef<THREE.Group | null>();
             }
             return objectRefs.current[id];
         };

@@ -4,11 +4,7 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { PlanetData, planets } from '@/lib/planet-data';
 import { asteroids, comets } from '@/lib/space-objects-data';
-
-interface SearchableObject {
-  id: string;
-  name: string;
-}
+import { type SearchableObject } from '@/lib/types';
 
 interface AiSearchProps {
   objects: SearchableObject[];

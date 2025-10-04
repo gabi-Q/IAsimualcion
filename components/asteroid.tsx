@@ -4,22 +4,17 @@ import React, { useRef, useMemo, useState, forwardRef } from 'react';
 import { useFrame } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
 import * as THREE from 'three';
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { AsteroidData } from '@/lib/space-objects-data';
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { Text } from '@react-three/drei';
-
-// Define a more specific type for the controls ref
-interface OrbitControlsRef {
-    target: THREE.Vector3;
-    update: () => void;
-}
 
 interface AsteroidProps {
   asteroid: AsteroidData;
   simulationSpeed: number;
   onClick: (asteroid: AsteroidData) => void;
   isFollowed: boolean;
-  controlsRef: React.RefObject<OrbitControlsRef>;
+  controlsRef: React.RefObject<OrbitControlsImpl>;
 }
 
 const Asteroid = forwardRef<THREE.Group, AsteroidProps>(({ asteroid, simulationSpeed, onClick, isFollowed, controlsRef }, ref) => {

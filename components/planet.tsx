@@ -5,21 +5,16 @@ import { useFrame } from "@react-three/fiber"
 import { Text } from "@react-three/drei"
 import type { PlanetData } from "@/lib/planet-data"
 import * as THREE from "three"
+import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
 import { useMobile } from "@/lib/hooks/use-mobile"
 import { useOptimizedTexture } from "@/lib/hooks/use-optimized-texture"
-
-// Define a more specific type for the controls ref
-interface OrbitControlsRef {
-    target: THREE.Vector3;
-    update: () => void;
-}
 
 interface PlanetProps {
     planet: PlanetData
     simulationSpeed: number;
     onClick: () => void;
     isFollowed: boolean;
-    controlsRef: React.RefObject<OrbitControlsRef>;
+    controlsRef: React.RefObject<OrbitControlsImpl>;
 }
 
 const Planet = forwardRef<THREE.Group, PlanetProps>(({ planet, simulationSpeed, onClick, isFollowed, controlsRef }, ref) => {
